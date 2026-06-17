@@ -13,23 +13,17 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="relative rounded-full px-3 py-1 text-sm/6 text-white ring-1 ring-white hover:ring-gray-900/20">
-              Creative by nature. Precise by design.{' '}
-              <a href="#" className="font-semibold text-[#DB3246]">
-                <span aria-hidden="true" className="absolute inset-0" />
-                Read more <span aria-hidden="true">&rarr;</span>
-              </a>
-            </div>
+          
           </motion.div>
           
           <div className="text-center">
-            <motion.h1 
+          <motion.h1 
               className="text-5xl font-semibold tracking-tight text-balance text-white"
               initial={{ opacity: 0, y: 20 }} 
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              Creative by nature. Precise by design.
+              We design and build software systems for modern businesses.
             </motion.h1>
             
             <motion.p 
@@ -38,7 +32,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              We craft digital experiences that are fast, fearless, and unforgettable. Strategy meets storytelling. Design meets impact.
+             Custom software, mobile apps, and internal tools that simplify operations, reduce manual work, and improve how your business runs.
             </motion.p>
             
             <motion.div 
@@ -53,7 +47,7 @@ export default function Hero() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Build with Guava
+                Build with NuruTek
               </motion.a>
               <motion.a 
                 href="#" 

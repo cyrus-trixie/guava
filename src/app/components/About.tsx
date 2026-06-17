@@ -20,7 +20,7 @@ const BackgroundPattern = () => (
     </div>
 );
 
-export default function AboutGuavaCreative() {
+export default function AboutNuruTekSolutions() {
     const [isInView, setIsInView] = useState(false);
     const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -101,25 +101,21 @@ export default function AboutGuavaCreative() {
                     <div className="flex flex-col justify-center">
 
                         <motion.h1
-                            variants={itemVariants}
-                            className="mt-3  font-bold tracking-tight text-gray-900 text-5xl"
-                        >
-                            <span className="block">Creativity with Teeth.</span>
-                            <span className="block text-[#DB3246]">Strategy with Soul.</span>
-                        </motion.h1>
+  variants={itemVariants}
+  className="mt-3 font-bold tracking-tight text-gray-900 text-5xl flex gap-2 items-baseline"
+>
+  <span>NuruTek</span>
+  <span className="text-[#DB3246]">Solutions</span>
+</motion.h1>
 
                         <motion.p
                             variants={itemVariants}
                             className="mt-6 text-lg text-gray-700 leading-relaxed"
                         >
-                            We&apos;re not just another creative agency. We&apos;re brand alchemists who transform the ordinary into the extraordinary, the overlooked into the unforgettable.
-                        </motion.p>
+                      NuruTek Solutions is a software development company based in Kenya, building custom software systems for modern businesses.
+We specialize in ERP solutions, web applications, mobile apps, and business tools that streamline operations and improve efficiency.
 
-                        <motion.p
-                            variants={itemVariants}
-                            className="mt-4 text-lg text-gray-700 leading-relaxed"
-                        >
-                            At Guava Creative, we&apos;ve mastered the delicate balance between artistic vision and commercial impact. Every pixel, word, and concept serves a purpose—to make your brand impossible to ignore in a world that&apos;s learned to look away.
+We also provide ongoing technical support and system maintenance to keep everything running smoothly.
                         </motion.p>
 
                         <motion.div
@@ -200,27 +196,27 @@ export default function AboutGuavaCreative() {
                         <div className="p-3 bg-[#DB3246] rounded-full">
                             <Rocket className="h-10 w-10 text-white" />
                         </div>
-                        <p className="mt-4 text-lg font-semibold text-white">Bold Strategy</p>
+                        <p className="mt-4 text-lg font-semibold text-white">Fast Delivery</p>
                         <p className="mt-2 text-sm text-white">
-                            Visionary ideas backed by market intelligence and fearless execution.
+                        We move quickly from idea to implementation, delivering solutions that create value without unnecessary delays.
                         </p>
                     </div>
-                    <div className="flex flex-col items-center">
+                    <div className="flex flex-col items-center">    
                         <div className="p-3 bg-[#DB3246] rounded-full">
                             <ShieldCheck className="h-10 w-10 text-white" />
                         </div>
-                        <p className="mt-4 text-lg font-semibold text-white">Craft Excellence</p>
+                        <p className="mt-4 text-lg font-semibold text-white">Reliable Support</p>
                         <p className="mt-2 text-sm text-white">
-                            Precision in every detail. From identity to interaction, we obsess over quality.
+                            From deployment to maintenance, we provide ongoing technical support to keep systems running smoothly.
                         </p>
                     </div>
                     <div className="flex flex-col items-center">
                         <div className="p-3 bg-[#DB3246] rounded-full">
                             <Database className="h-10 w-10 text-white" />
                         </div>
-                        <p className="mt-4 text-lg font-semibold text-white">Measurable Impact</p>
+                        <p className="mt-4 text-lg font-semibold text-white">Scalable Systems</p>
                         <p className="mt-2 text-sm text-white">
-                            Data isn&apos;t decoration—it&apos;s direction. We create what moves metrics.
+                            We build software and business tools designed to grow with your operations and adapt to changing needs.
                         </p>
                     </div>
                 </div>

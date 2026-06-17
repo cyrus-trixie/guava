@@ -39,11 +39,11 @@ const Header = () => {
                     <Link
                         href="/"
                         className="text-2xl font-nexa-heavy tracking-tight text-white hover:opacity-90 transition-opacity focus-visible:outline-white focus-visible:outline-offset-4 focus-visible:outline-2 focus-visible:rounded-sm"
-                        aria-label="Guava home"
+                        aria-label="NuruTek home"
                     >
                         <Image
                             src="/logo.svg" // Replace with your actual image path
-                            alt="Guava Logo"
+                            alt="NuruTek Logo"
                             width={40}
                             height={40}
                             priority
