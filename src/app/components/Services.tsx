@@ -105,7 +105,7 @@ export default function Services() {
 
   const featureVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: (delay) => ({
+    visible: (delay:number) => ({
       opacity: 1,
       y: 0,
       transition: { 
@@ -158,9 +158,10 @@ export default function Services() {
       <div className="mx-auto max-w-6xl px-6 lg:px-0">
         <motion.div 
           className="mx-auto max-w-4xl lg:text-center"
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          variants={containerVariants}
+         initial="hidden"
+whileInView="visible"
+viewport={{ once: true, amount: 0.2 }}
+variants={containerVariants}
         >
           <motion.div variants={itemVariants}>
             <motion.span 
@@ -197,7 +198,7 @@ export default function Services() {
         >
           <dl className="grid max-w-xl grid-cols-1 gap-x-12 gap-y-8 lg:max-w-none lg:grid-cols-3 lg:gap-y-8">
             {features.map((feature) => {
-              const Icon = icons[feature.icon];
+            const Icon = icons[feature.icon as keyof typeof icons];
               
               return (
                 <motion.div 

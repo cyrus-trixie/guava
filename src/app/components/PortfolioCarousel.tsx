@@ -1,8 +1,8 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
-import { motion, useAnimation, useMotionValue, useTransform, AnimatePresence } from 'framer-motion';
-import { ArrowRight, ArrowLeft, ExternalLink, Plus } from 'lucide-react';
+import { useRef, useState, useEffect, useCallback } from 'react';
+import { motion, useAnimation, AnimatePresence, PanInfo } from 'framer-motion';
+import { ArrowRight, ArrowLeft, ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 
 // Define TypeScript interfaces
@@ -68,21 +68,33 @@ export default function PortfolioCarousel({ projects = projectData }: PortfolioC
   const [isDragging, setIsDragging] = useState(false);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [hoveringNav, setHoveringNav] = useState<"next" | "prev" | false>(false);
-  const controls = useAnimation();
   const carouselRef = useRef<HTMLDivElement>(null);
-  
-  // Progress bar animation
-  const [progress, setProgress] = useState(0);
+
+  // Progress bar animation controls (driven by currentIndex, see effect below)
   const progressControls = useAnimation();
-  
+
   useEffect(() => {
-    // Update progress when currentIndex changes
-    setProgress((currentIndex / (projects.length - 1)) * 100);
     progressControls.start({
       width: `${(currentIndex / (projects.length - 1)) * 100}%`,
       transition: { duration: 0.6, ease: [0.32, 0.72, 0, 1] }
     });
   }, [currentIndex, projects.length, progressControls]);
+
+  const handlePrev = useCallback(() => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setDirection(-1);
+    setCurrentIndex(prev => (prev === 0 ? projects.length - 1 : prev - 1));
+    setTimeout(() => setIsAnimating(false), 600);
+  }, [isAnimating, projects.length]);
+
+  const handleNext = useCallback(() => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setDirection(1);
+    setCurrentIndex(prev => (prev === projects.length - 1 ? 0 : prev + 1));
+    setTimeout(() => setIsAnimating(false), 600);
+  }, [isAnimating, projects.length]);
 
   // Auto-advance carousel
   useEffect(() => {
@@ -91,27 +103,11 @@ export default function PortfolioCarousel({ projects = projectData }: PortfolioC
         handleNext();
       }
     }, 6000);
-    
+
     return () => clearTimeout(timer);
-  }, [currentIndex, isDragging, hoveringNav]);
+  }, [currentIndex, isDragging, hoveringNav, handleNext]);
 
-  const handlePrev = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setDirection(-1);
-    setCurrentIndex(prev => (prev === 0 ? projects.length - 1 : prev - 1));
-    setTimeout(() => setIsAnimating(false), 600);
-  };
-
-  const handleNext = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setDirection(1);
-    setCurrentIndex(prev => (prev === projects.length - 1 ? 0 : prev + 1));
-    setTimeout(() => setIsAnimating(false), 600);
-  };
-
-  const handleDragEnd = (event: any, info: any) => {
+  const handleDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     setIsDragging(false);
     if (Math.abs(info.offset.x) > 100) {
       if (info.offset.x < 0) {
@@ -198,16 +194,7 @@ export default function PortfolioCarousel({ projects = projectData }: PortfolioC
         )}
       </motion.div>
 
-      {/* Subtle grain texture overlay */}
-      <div className="absolute inset-0 z-10 opacity-20 pointer-events-none">
-        <svg width="100%" height="100%">
-          <filter id="noise">
-            <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" />
-            <feColorMatrix type="saturate" values="0" />
-          </filter>
-          <rect width="100%" height="100%" filter="url(#noise)" opacity="0.15" />
-        </svg>
-      </div>
+    
 
       
 

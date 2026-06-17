@@ -1,18 +1,51 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Rocket, ShieldCheck, Database, ChevronRight } from 'lucide-react';
 
+// Background pattern - subtle dot grid (moved outside component so it's not redefined every render)
+const BackgroundPattern = () => (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute w-full h-full opacity-5">
+            <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <pattern id="dotGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+                        <circle cx="2" cy="2" r="1" fill="#DB3246" />
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#dotGrid)" />
+            </svg>
+        </div>
+    </div>
+);
+
 export default function AboutGuavaCreative() {
     const [isInView, setIsInView] = useState(false);
+    const videoRef = useRef<HTMLVideoElement>(null);
 
     useEffect(() => {
-        // Set isInView to true after component mounts to trigger animations
-        const timer = setTimeout(() => {
-            setIsInView(true);
-        }, 100);
-        return () => clearTimeout(timer);
+        setIsInView(true);
+    }, []);
+
+    // Only play the video while it's actually visible on screen
+    useEffect(() => {
+        const videoEl = videoRef.current;
+        if (!videoEl) return;
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    videoEl.play().catch(() => {});
+                } else {
+                    videoEl.pause();
+                }
+            },
+            { threshold: 0.25 }
+        );
+
+        observer.observe(videoEl);
+        return () => observer.disconnect();
     }, []);
 
     // Animation variants
@@ -45,22 +78,6 @@ export default function AboutGuavaCreative() {
         }
     };
 
-    // Background pattern - subtle dot grid
-    const BackgroundPattern = () => (
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute w-full h-full opacity-5">
-                <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <pattern id="dotGrid" width="20" height="20" patternUnits="userSpaceOnUse">
-                            <circle cx="2" cy="2" r="1" fill="#DB3246" />
-                        </pattern>
-                    </defs>
-                    <rect width="100%" height="100%" fill="url(#dotGrid)" />
-                </svg>
-            </div>
-        </div>
-    );
-
     return (
         <div className="relative bg-white overflow-hidden px-6 py-16 lg:px-0">
             <BackgroundPattern />
@@ -83,7 +100,6 @@ export default function AboutGuavaCreative() {
                     {/* Left Column: Text Content */}
                     <div className="flex flex-col justify-center">
 
-
                         <motion.h1
                             variants={itemVariants}
                             className="mt-3  font-bold tracking-tight text-gray-900 text-5xl"
@@ -96,17 +112,15 @@ export default function AboutGuavaCreative() {
                             variants={itemVariants}
                             className="mt-6 text-lg text-gray-700 leading-relaxed"
                         >
-                            We're not just another creative agency. We're brand alchemists who transform the ordinary into the extraordinary, the overlooked into the unforgettable.
+                            We&apos;re not just another creative agency. We&apos;re brand alchemists who transform the ordinary into the extraordinary, the overlooked into the unforgettable.
                         </motion.p>
 
                         <motion.p
                             variants={itemVariants}
                             className="mt-4 text-lg text-gray-700 leading-relaxed"
                         >
-                            At Guava Creative, we've mastered the delicate balance between artistic vision and commercial impact. Every pixel, word, and concept serves a purpose—to make your brand impossible to ignore in a world that's learned to look away.
+                            At Guava Creative, we&apos;ve mastered the delicate balance between artistic vision and commercial impact. Every pixel, word, and concept serves a purpose—to make your brand impossible to ignore in a world that&apos;s learned to look away.
                         </motion.p>
-
-
 
                         <motion.div
                             variants={itemVariants}
@@ -140,20 +154,6 @@ export default function AboutGuavaCreative() {
                             whileHover={{ scale: 1.02 }}
                             transition={{ duration: 0.5 }}
                         >
-                            {/* Accent shape behind video */}
-                            <motion.div
-                                className="absolute -top-6 -right-6 w-40 h-40 bg-[#DB3246] opacity-20 rounded-full blur-xl"
-                                animate={{
-                                    scale: [1, 1.1, 1],
-                                    opacity: [0.2, 0.3, 0.2]
-                                }}
-                                transition={{
-                                    duration: 8,
-                                    repeat: Infinity,
-                                    ease: "easeInOut"
-                                }}
-                            />
-
                             <motion.div
                                 className="aspect-w-16 aspect-h-9 bg-[#DB3246]/10 shadow-sm  rotate-3 rounded-2xl overflow-hidden" 
                                 initial={{ opacity: 0 }}
@@ -161,19 +161,15 @@ export default function AboutGuavaCreative() {
                                 transition={{ duration: 0.8, delay: 0.5 }}
                             >
                                 <video
+                                    ref={videoRef}
                                     className="w-full h-full bg-[#DB3246]/30 object-cover"
-                                    autoPlay
                                     loop
                                     muted
                                     playsInline
-                                    poster="https://guavacreative.com/preview.jpg"
                                 >
-                                    <source src="https://videos.pexels.com/video-files/3045052/3045052-uhd_2560_1440_24fps.mp4" type="video/mp4" />
+                                    <source src="/heroVideo.mp4" type="video/mp4" />
                                     Your browser does not support the video tag.
                                 </video>
-
-                                {/* Subtle overlay gradient */}
-                                {/* <div className="absolute inset-0 bg-gradient-to-br from-transparent to-black opacity-20"></div> */}
 
                                 {/* Accent lines */}
                                 <motion.div
@@ -224,7 +220,7 @@ export default function AboutGuavaCreative() {
                         </div>
                         <p className="mt-4 text-lg font-semibold text-white">Measurable Impact</p>
                         <p className="mt-2 text-sm text-white">
-                            Data isn’t decoration—it’s direction. We create what moves metrics.
+                            Data isn&apos;t decoration—it&apos;s direction. We create what moves metrics.
                         </p>
                     </div>
                 </div>
