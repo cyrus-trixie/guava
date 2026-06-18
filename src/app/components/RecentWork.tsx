@@ -1,34 +1,156 @@
+'use client';
+
+import { motion } from 'framer-motion';
+
+const PROJECTS = [
+  {
+    title: "SuperMarket POS",
+    tag: "Point of Sale System",
+    image: "/images/erp.png",
+    width: 1500,
+    height: 1229,
+    href: "#",
+  },
+  {
+    title: "Tembea Pay",
+    tag: "M-Pesa Integration",
+    image: "/images/tembea-pay.png",
+    width: 1500,
+    height: 1393,
+    href: "#",
+  },
+  {
+    title: "Harambee Ledger",
+    tag: "Finance Dashboard",
+    image: "/images/harambee-ledger.png",
+    width: 1500,
+    height: 1000,
+    href: "#",
+  },
+  {
+    title: "Soko Mobile",
+    tag: "Mobile Marketplace App",
+    image: "/images/soko-mobile.png",
+    width: 1500,
+    height: 1125,
+    href: "#",
+  },
+  {
+    title: "Nuru CRM",
+    tag: "Custom Software",
+    image: "/images/nuru-crm.png",
+    width: 1500,
+    height: 1300,
+    href: "#",
+  },
+  {
+    title: "Bahari Hotels",
+    tag: "Booking Platform",
+    image: "/images/bahari-hotels.png",
+    width: 1500,
+    height: 1050,
+    href: "#",
+  },
+];
+
+// Cards rise into focus rather than just fading — a slight blur clears as
+// they settle, like a photo developing. Fits a photography-led portfolio
+// grid better than a plain fade, without adding any extra motion noise.
+const cardVariants = {
+  hidden: { opacity: 0, y: 28, scale: 0.97, filter: "blur(6px)" },
+  visible: { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" },
+};
+
+const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
+function ProjectCard({ project, index }) {
+  return (
+    // break-inside-avoid keeps each card intact instead of splitting
+    // across columns; mb-6 is the only spacing needed, columns-* below
+    // handles everything else.
+    <motion.article
+      className="mb-6 break-inside-avoid"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.25 }}
+      variants={cardVariants}
+      transition={{ duration: 0.7, ease: easeOut, delay: index * 0.08 }}
+    >
+      <a href={project.href} className="group block">
+        <div className="relative overflow-hidden rounded-xl bg-gray-100">
+          <img
+            src={project.image}
+            alt={project.title}
+            width={project.width}
+            height={project.height}
+            className="h-auto w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+          />
+
+          {/* Dark scrim + centered arrow button, both hidden until hover */}
+          <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-300 group-hover:bg-black/30">
+            <span className="flex h-11 w-11 scale-75 items-center justify-center rounded-full bg-white opacity-0 transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M5 12h14M13 6l6 6-6 6"
+                  stroke="#DB3246"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
+          </div>
+        </div>
+
+        {/* Title and category sit below the image in normal flow,
+            not overlaid on it — matches the Tuwele reference. */}
+        <h3 className="mt-4 text-lg font-semibold text-gray-900">
+          {project.title}
+        </h3>
+        <span className="mt-1 inline-block text-xs font-medium uppercase tracking-wider text-[#DB3246]">
+          {project.tag}
+        </span>
+      </a>
+    </motion.article>
+  );
+}
+
 export default function RecentWork() {
   return (
-    <div className="bg-[#1A1A1A] py-12">
+    <section className="bg-[#1A1A1A] py-20 sm:py-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold tracking-tight text-white sm:text-5xl">
+        <motion.h2
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.6, ease: easeOut }}
+          className="text-3xl font-bold tracking-tight text-white sm:text-5xl"
+        >
           Recent Work
-        </h2>
-        <p className="mt-6 text-lg/8 text-gray-600 max-w-2xl mx-auto">
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.6, delay: 0.1, ease: easeOut }}
+          className="mt-6 max-w-2xl text-lg/8 text-white/60"
+        >
           Here are some of the projects we've been working on lately.
-        </p>
-      </div>
-      <div className="mt-10 max-w-7xl mx-auto h-screen px-4 py-6 sm:px-6 lg:px-8 bg-white grid grid-cols-1 md:grid-cols-2 gap-6">
-  <div className="bg-gray-200 rounded-lg p-0 flex-col space-y-4 h-full">
-    <div style={{backgroundImage: 'url(/images/erp.png)', backgroundSize: 'cover', backgroundPosition: 'center'}} className="rounded-lg h-[80%] w-full" >
+        </motion.p>
 
-    </div>
-    <div>
-      <h1 className="text-xl font-bold text-black">SuperMarkets</h1>
-      <p className="text-black">POS System</p>
-    </div>
-  </div>
-  <div className="bg-gray-600 rounded-lg p-6 flex items-center justify-center h-full">
-    dadd
-  </div>
-  <div className="bg-gray-300 rounded-lg p-6 flex items-center justify-center h-full">
-    dadd
-  </div>
-  <div className="bg-gray-600 rounded-lg p-6 flex items-center justify-center h-full">
-    dadd
-  </div>
-</div>
-    </div>
+        {/* White panel holding the grid, sitting on the dark section */}
+        <div className="mt-12 rounded-3xl bg-white p-6 sm:p-10 lg:p-12">
+          {/* True masonry via CSS multi-column instead of a manual split:
+              each card just flows into whichever column has room next,
+              so column heights are uneven on their own — no JS, no fixed
+              offsets, same effect as Tuwele's packery grid. */}
+          <div className="columns-1 gap-6 md:columns-2 md:gap-8">
+            {PROJECTS.map((project, index) => (
+              <ProjectCard key={project.title} project={project} index={index} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
   );
-} 
+}
