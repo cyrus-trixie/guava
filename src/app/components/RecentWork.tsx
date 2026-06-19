@@ -4,20 +4,20 @@ import { motion } from 'framer-motion';
 
 const PROJECTS = [
   {
-    title: "SuperMarket POS",
+    title: "Vend Grid",
     tag: "Point of Sale System",
-    image: "/images/erp.png",
+    image: "/images/pos.png",
     width: 1500,
     height: 1229,
-    href: "#",
+    href: "https://vend-grid-main.vercel.app/",
   },
   {
-    title: "Tembea Pay",
-    tag: "M-Pesa Integration",
-    image: "/images/tembea-pay.png",
+    title: "ClientOps",
+    tag: "client management system",
+    image: "/images/clientOps.png",
     width: 1500,
     height: 1393,
-    href: "#",
+    href: "https://clientops.vercel.app/",
   },
   {
     title: "Harambee Ledger",
@@ -28,12 +28,12 @@ const PROJECTS = [
     href: "#",
   },
   {
-    title: "Soko Mobile",
-    tag: "Mobile Marketplace App",
-    image: "/images/soko-mobile.png",
+    title: "Seen Heard Elevated",
+    tag: "Therapist Booking Platform",
+    image: "/images/she.png",
     width: 1500,
     height: 1125,
-    href: "#",
+    href: "https://seenheardelevated.com/",
   },
   {
     title: "Nuru CRM",
@@ -76,8 +76,8 @@ function ProjectCard({ project, index }) {
       variants={cardVariants}
       transition={{ duration: 0.7, ease: easeOut, delay: index * 0.08 }}
     >
-      <a href={project.href} className="group block">
-        <div className="relative overflow-hidden rounded-xl bg-gray-100">
+      <a href={project.href} className="group block" target="_blank" rel="noopener noreferrer">
+        <div className="relative overflow-hidden  bg-gray-100">
           <img
             src={project.image}
             alt={project.title}
