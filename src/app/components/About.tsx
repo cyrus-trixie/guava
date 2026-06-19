@@ -1,10 +1,13 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion, Variants, Easing } from 'framer-motion';
 import { Rocket, ShieldCheck, Database, ChevronRight } from 'lucide-react';
 
-// Background pattern - subtle dot grid (moved outside component so it's not redefined every render)
+
+const customEase: Easing = [0.25, 0.1, 0.25, 1.0];
+
+// Background pattern - subtle dot grid
 const BackgroundPattern = () => (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute w-full h-full opacity-5">
@@ -48,8 +51,7 @@ export default function AboutNuruTekSolutions() {
         return () => observer.disconnect();
     }, []);
 
-    // Animation variants
-    const containerVariants = {
+    const containerVariants: Variants = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
@@ -60,21 +62,29 @@ export default function AboutNuruTekSolutions() {
         }
     };
 
-    const itemVariants = {
+  
+    const itemVariants: Variants = {
         hidden: { y: 20, opacity: 0 },
         visible: {
             y: 0,
             opacity: 1,
-            transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1.0] }
+            transition: { 
+                duration: 0.8, 
+                ease: customEase
+            }
         }
     };
 
-    const videoVariants = {
+
+    const videoVariants: Variants = {
         hidden: { scale: 0.95, opacity: 0 },
         visible: {
             scale: 1,
             opacity: 1,
-            transition: { duration: 1.2, ease: [0.25, 0.1, 0.25, 1.0] }
+            transition: { 
+                duration: 1.2, 
+                ease: customEase
+            }
         }
     };
 
@@ -99,23 +109,22 @@ export default function AboutNuruTekSolutions() {
                 >
                     {/* Left Column: Text Content */}
                     <div className="flex flex-col justify-center">
-
                         <motion.h1
-  variants={itemVariants}
-  className="mt-3 font-bold tracking-tight text-gray-900 text-5xl flex gap-2 items-baseline"
->
-  <span>NuruTek</span>
-  <span className="text-[#DB3246]">Solutions</span>
-</motion.h1>
+                            variants={itemVariants}
+                            className="mt-3 font-bold tracking-tight text-gray-900 text-5xl flex gap-2 items-baseline"
+                        >
+                            <span>NuruTek</span>
+                            <span className="text-[#DB3246]">Solutions</span>
+                        </motion.h1>
 
                         <motion.p
                             variants={itemVariants}
                             className="mt-6 text-lg text-gray-700 leading-relaxed"
                         >
-                      NuruTek Solutions is a software development company based in Kenya, building custom software systems for modern businesses.
-We specialize in ERP solutions, web applications, mobile apps, and business tools that streamline operations and improve efficiency.
+                            NuruTek Solutions is a software development company based in Kenya, building custom software systems for modern businesses.
+                            We specialize in ERP solutions, web applications, mobile apps, and business tools that streamline operations and improve efficiency.
 
-We also provide ongoing technical support and system maintenance to keep everything running smoothly.
+                            We also provide ongoing technical support and system maintenance to keep everything running smoothly.
                         </motion.p>
 
                         <motion.div
@@ -151,7 +160,7 @@ We also provide ongoing technical support and system maintenance to keep everyth
                             transition={{ duration: 0.5 }}
                         >
                             <motion.div
-                                className="aspect-w-16 aspect-h-9 bg-[#DB3246]/10 shadow-sm  rotate-3 rounded-2xl overflow-hidden" 
+                                className="aspect-w-16 aspect-h-9 bg-[#DB3246]/10 shadow-sm rotate-3 rounded-2xl overflow-hidden"
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ duration: 0.8, delay: 0.5 }}
@@ -198,10 +207,10 @@ We also provide ongoing technical support and system maintenance to keep everyth
                         </div>
                         <p className="mt-4 text-lg font-semibold text-white">Fast Delivery</p>
                         <p className="mt-2 text-sm text-white">
-                        We move quickly from idea to implementation, delivering solutions that create value without unnecessary delays.
+                            We move quickly from idea to implementation, delivering solutions that create value without unnecessary delays.
                         </p>
                     </div>
-                    <div className="flex flex-col items-center">    
+                    <div className="flex flex-col items-center">
                         <div className="p-3 bg-[#DB3246] rounded-full">
                             <ShieldCheck className="h-10 w-10 text-white" />
                         </div>
@@ -221,7 +230,6 @@ We also provide ongoing technical support and system maintenance to keep everyth
                     </div>
                 </div>
             </motion.div>
-
         </div>
     );
 }

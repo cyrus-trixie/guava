@@ -1,6 +1,16 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
+
+type Project = {
+  title: string;
+  tag: string;
+  image: string;
+  width: number;
+  height: number;
+  href: string;
+};
 
 const PROJECTS = [
   {
@@ -63,7 +73,7 @@ const cardVariants = {
 
 const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
-function ProjectCard({ project, index }) {
+function ProjectCard({ project, index }: { project: Project; index: number }) {
   return (
     // break-inside-avoid keeps each card intact instead of splitting
     // across columns; mb-6 is the only spacing needed, columns-* below
@@ -78,7 +88,7 @@ function ProjectCard({ project, index }) {
     >
       <a href={project.href} className="group block" target="_blank" rel="noopener noreferrer">
         <div className="relative overflow-hidden  bg-gray-100">
-          <img
+          <Image
             src={project.image}
             alt={project.title}
             width={project.width}

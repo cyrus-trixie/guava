@@ -2,7 +2,24 @@
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 
-const footerSections = [
+// ✅ Add types
+type Link = {
+  label: string;
+  href: string;
+};
+
+type Section = {
+  title: string;
+  links: Link[];
+};
+
+type SocialIcon = {
+  label: string;
+  href: string;
+  path: string;
+};
+
+const footerSections: Section[] = [
   {
     title: 'Product',
     links: [
@@ -50,9 +67,7 @@ const footerSections = [
   },
 ];
 
-// Plain inline glyphs instead of brand icon imports, so this never breaks
-// depending on which lucide-react version is installed.
-const socialIcons = [
+const socialIcons: SocialIcon[] = [
   {
     label: 'X (Twitter)',
     href: '#',
@@ -75,7 +90,13 @@ const socialIcons = [
   },
 ];
 
-function FooterLink({ href, children }) {
+
+type FooterLinkProps = {
+  href: string;
+  children: React.ReactNode;
+};
+
+function FooterLink({ href, children }: FooterLinkProps) {
   return (
     <a
       href={href}
@@ -86,7 +107,14 @@ function FooterLink({ href, children }) {
   );
 }
 
-function AccordionSection({ section, isOpen, onToggle }) {
+
+type AccordionSectionProps = {
+  section: Section;
+  isOpen: boolean;
+  onToggle: () => void;
+};
+
+function AccordionSection({ section, isOpen, onToggle }: AccordionSectionProps) {
   return (
     <div className="border-b border-gray-100">
       <button
@@ -111,7 +139,7 @@ function AccordionSection({ section, isOpen, onToggle }) {
         }`}
       >
         <ul className="min-h-0 space-y-3 pb-4">
-          {section.links.map((link) => (
+          {section.links.map((link: Link) => (
             <li key={link.label}>
               <FooterLink href={link.href}>{link.label}</FooterLink>
             </li>
@@ -123,7 +151,7 @@ function AccordionSection({ section, isOpen, onToggle }) {
 }
 
 export default function Footer() {
-  const [openIndex, setOpenIndex] = useState(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
   const year = new Date().getFullYear();
 
   return (
