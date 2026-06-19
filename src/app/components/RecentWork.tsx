@@ -145,7 +145,7 @@ export default function RecentWork() {
           transition={{ duration: 0.6, delay: 0.1, ease: easeOut }}
           className="mt-6 max-w-2xl text-lg/8 text-white/60"
         >
-          Here are some of the projects we've been working on lately.
+          Here are some of the projects we have been working on lately.
         </motion.p>
 
         {/* White panel holding the grid, sitting on the dark section */}
