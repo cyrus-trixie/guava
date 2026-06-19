@@ -3,8 +3,21 @@ import { motion } from 'framer-motion'
 
 export default function Hero() {
   return (
-    <div className="bg-black">
-      <div className="relative isolate px-6 pt-4 lg:px-8">
+    <div className="bg-black relative overflow-hidden" >
+        {/* Video Background */}
+  <video
+    autoPlay
+    loop
+    muted
+    playsInline
+    className="absolute top-0 left-0 w-full h-full object-cover"
+  >
+    <source src="/Dark Background Web.mp4" type="video/mp4" />
+    {/* Add fallback image if video doesn't load */}
+    Your browser does not support the video tag.
+  </video>
+
+      <div className="relative isolate px-6 pt-4 lg:px-8 z-10">
         {/* Hero content */}
         <div className="mx-auto max-w-2xl py-32">
           <motion.div 

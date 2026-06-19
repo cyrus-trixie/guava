@@ -42,10 +42,10 @@ const Header = () => {
                         aria-label="NuruTek home"
                     >
                         <Image
-                            src="/logo.svg" // Replace with your actual image path
+                            src="/logo.png" // Replace with your actual image path
                             alt="NuruTek Logo"
-                            width={40}
-                            height={40}
+                            width={60}
+                            height={60}
                             priority
                         />
                     </Link>
