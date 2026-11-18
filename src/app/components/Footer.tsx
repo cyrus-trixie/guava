@@ -1,8 +1,9 @@
 'use client';
 import { useState } from 'react';
+import NextLink from 'next/link';
 import { ChevronDown } from 'lucide-react';
+import { services } from '../data/services';
 
-// ✅ Add types
 type Link = {
   label: string;
   href: string;
@@ -21,14 +22,11 @@ type SocialIcon = {
 
 const footerSections: Section[] = [
   {
-    title: 'Product',
-    links: [
-      { label: 'Web Applications', href: '#' },
-      { label: 'Mobile Apps', href: '#' },
-      { label: 'ERP Solutions', href: '#' },
-      { label: 'M-Pesa Integrations', href: '#' },
-      { label: 'Business Tools', href: '#' },
-    ],
+    title: 'Services',
+    links: services.map((service) => ({
+      label: service.name,
+      href: `/services/${service.slug}`,
+    })),
   },
   {
     title: 'Company',
@@ -90,23 +88,30 @@ const socialIcons: SocialIcon[] = [
   },
 ];
 
-
 type FooterLinkProps = {
   href: string;
   children: React.ReactNode;
 };
 
 function FooterLink({ href, children }: FooterLinkProps) {
+  const className =
+    'text-sm text-gray-500 transition-colors duration-200 hover:text-[#DB3246]';
+
+  // Internal pages use Next's Link for fast client-side navigation
+  if (href.startsWith('/')) {
+    return (
+      <NextLink href={href} className={className}>
+        {children}
+      </NextLink>
+    );
+  }
+
   return (
-    <a
-      href={href}
-      className="text-sm text-gray-500 transition-colors duration-200 hover:text-[#DB3246]"
-    >
+    <a href={href} className={className}>
       {children}
     </a>
   );
 }
-
 
 type AccordionSectionProps = {
   section: Section;

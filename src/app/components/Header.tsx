@@ -5,6 +5,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
 
+const navLinks = [
+    { label: 'Work', href: '/#work' },
+    { label: 'Services', href: '/services' },
+    { label: 'About', href: '/about' },
+];
+
 const Header = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -52,17 +58,17 @@ const Header = () => {
 
                     {/* Desktop Menu */}
                     <nav className="hidden md:flex gap-8 text-sm font-nexa-heavy text-white">
-                        {['Work', 'Services', 'About'].map((item) => (
+                        {navLinks.map((link) => (
                             <Link
-                                key={item}
-                                href={`#${item.toLowerCase()}`}
+                                key={link.label}
+                                href={link.href}
                                 className="relative py-2 hover:text-white/80 transition-colors duration-200 
                   focus-visible:outline-white focus-visible:outline-offset-4 focus-visible:outline-2 focus-visible:rounded-sm
                   after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0
                   after:bg-white after:transition-all after:duration-300
                   hover:after:w-full"
                             >
-                                {item}
+                                {link.label}
                             </Link>
                         ))}
                     </nav>
@@ -71,7 +77,7 @@ const Header = () => {
                 {/* Right: Call to Action & Mobile menu button */}
                 <div className="flex items-center gap-4">
                     <Link
-                        href="#contact"
+                        href="/#contact"
                         className="inline-flex items-center px-5 py-2 text-sm border-2 border-white font-nexa-heavy text-white bg-[#db3246] rounded-full
               hover:bg-white/90 focus:bg-white/90 active:scale-[0.98]
               transition-all duration-200 
@@ -109,20 +115,20 @@ const Header = () => {
                 aria-hidden={!mobileMenuOpen}
             >
                 <nav className="flex flex-col p-4 space-y-3 text-base font-nexa-heavy text-white">
-                    {['Work', 'Services', 'About'].map((item) => (
+                    {navLinks.map((link) => (
                         <Link
-                            key={item}
-                            href={`#${item.toLowerCase()}`}
+                            key={link.label}
+                            href={link.href}
                             className="py-3 px-4 hover:bg-white/10 rounded-lg transition-colors
                 focus-visible:outline-white focus-visible:outline-offset-4 focus-visible:outline-2 focus-visible:rounded-lg"
                             onClick={() => setMobileMenuOpen(false)}
                         >
-                            {item}
+                            {link.label}
                         </Link>
                     ))}
                     <hr className="border-white/20 my-1" />
                     <Link
-                        href="#contact"
+                        href="/#contact"
                         className="py-3 px-4 bg-black text-white rounded-lg
               hover:bg-white/90 transition-colors
               focus-visible:outline-white focus-visible:outline-offset-4 focus-visible:outline-2 focus-visible:rounded-lg"
